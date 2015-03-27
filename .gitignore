@@ -6,4 +6,9 @@
 /doc/
 /pkg/
 /spec/reports/
-/tmp/
+/tmp/*
+!.keep
+!/log/.keep
+*.DS_Store
+*.swo
+*.swp
