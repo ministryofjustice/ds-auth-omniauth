@@ -25,7 +25,7 @@ module OmniAuth
       end
 
       def raw_info
-        @_raw_info ||= MultiJson.decode access_token.get("/api/vi/me.json").body
+        @_raw_info ||= MultiJson.decode access_token.get("/api/vi/me").body
       end
 
       private
