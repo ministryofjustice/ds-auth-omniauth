@@ -21,7 +21,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "omniauth-oauth2", "~> 1.2.0"
 
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "dotenv", "~> 2.0.0"
-  spec.add_development_dependency 'rspec', '~> 2.7'
-  spec.add_development_dependency 'rack-test'
+  spec.add_development_dependency 'rspec', '~> 3.2'
 end
