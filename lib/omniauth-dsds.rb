@@ -1,2 +1,2 @@
 require "omniauth-dsds/version"
-require "omniauth/strategies/dsds"
+require "omniauth/strategies/defence_request"

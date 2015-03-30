@@ -5,7 +5,10 @@ module OmniAuth
     class DefenceRequest < OmniAuth::Strategies::OAuth2
       option :name, "defence_request"
 
-      provider { 'defence_request' }
+      option :client_options, {
+        site: ENV.fetch('AUTHENTICATION_SITE_URL'),
+        redirect_url: ENV.fetch('AUTHENTICATION_REDIRECT_URI')
+      }
 
       uid { user_info["id"] }
 
@@ -25,7 +28,7 @@ module OmniAuth
       end
 
       def raw_info
-        @_raw_info ||= MultiJson.decode access_token.get("/api/vi/me").body
+        @_raw_info ||= MultiJson.decode access_token.get("/api/v1/me").body
       end
 
       private
