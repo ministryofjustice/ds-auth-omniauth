@@ -22,7 +22,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Tell OmniAuth about this provider. For a Rails app, your `config/initializers/omniauth.rb` file should look like this:
+
+```ruby
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :defence_request, API_KEY, API_SECRET
+end
+```
+
+Replace `"API_KEY"` and `"API_SECRET"` with appropriate values.
 
 ## Development
 
