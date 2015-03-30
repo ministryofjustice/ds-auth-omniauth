@@ -2,12 +2,12 @@ require "omniauth-oauth2"
 
 module OmniAuth
   module Strategies
-    class Dsds < OmniAuth::Strategies::OAuth2
-      option :name, "dsds"
+    class DefenceRequest < OmniAuth::Strategies::OAuth2
+      option :name, "defence_request"
+
+      provider { 'defence_request' }
 
       uid { user_info["id"] }
-
-      provider { 'dsds' }
 
       info do
         {
@@ -25,7 +25,7 @@ module OmniAuth
       end
 
       def raw_info
-        @_raw_info ||= MultiJson.decode access_token.get("/me").body
+        @_raw_info ||= MultiJson.decode access_token.get("/api/vi/me.json").body
       end
 
       private
