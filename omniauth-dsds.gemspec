@@ -17,6 +17,8 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.require_paths = ["lib"]
 
+  spec.required_ruby_version = '>= 2.2'
+
   spec.add_dependency "multi_json", "~> 1.11.0"
   spec.add_runtime_dependency "omniauth-oauth2", "~> 1.2.0"
 
