@@ -7,18 +7,18 @@ ENV['AUTHENTICATION_APPLICATION_SECRET'] = 'abcfe'
 
 RSpec.describe Omniauth::Dsds::ControllerMethods, "#current_user" do
   subject {
-    Class.new do
+    Class.new {
       include Omniauth::Dsds::ControllerMethods
 
       def session
         @session ||= {}
       end
 
-    end.new
       def reset_session
         @session = {}
       end
 
+    }.new
   }
 
   context "with no auth token in the session" do
