@@ -20,7 +20,7 @@ module Omniauth
         build_user
 
       rescue OAuth2::Error
-        session.clear
+        reset_session
         nil
       end
 

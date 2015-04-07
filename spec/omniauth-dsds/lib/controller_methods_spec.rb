@@ -15,6 +15,10 @@ RSpec.describe Omniauth::Dsds::ControllerMethods, "#current_user" do
       end
 
     end.new
+      def reset_session
+        @session = {}
+      end
+
   }
 
   context "with no auth token in the session" do
