@@ -29,7 +29,7 @@ module Omniauth
       end
 
       def strategy
-        OmniAuth::Strategies::DefenceRequest.new Settings.authentication.application_id, Settings.authentication.application_secret
+        OmniAuth::Strategies::DefenceRequest.new ENV.fetch('AUTHENTICATION_APPLICATION_ID'), ENV.fetch('AUTHENTICATION_APPLICATION_SECRET')
       end
 
       def strategy_with_access_token(token: )
