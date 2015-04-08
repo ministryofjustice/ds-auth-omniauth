@@ -6,20 +6,31 @@ ENV['AUTHENTICATION_APPLICATION_ID'] = '12345'
 ENV['AUTHENTICATION_APPLICATION_SECRET'] = 'abcfe'
 
 RSpec.describe Omniauth::Dsds::ControllerMethods, "#current_user" do
-  subject {
-    Class.new {
-      include Omniauth::Dsds::ControllerMethods
+  class FakeController
+    def self.helper_method(included_method)
+      @included_method = included_method
+    end
 
-      def session
-        @session ||= {}
-      end
+    include Omniauth::Dsds::ControllerMethods
 
-      def reset_session
-        @session = {}
-      end
+    def session
+      @session ||= {}
+    end
 
-    }.new
-  }
+    def reset_session
+      @session = {}
+    end
+  end
+
+  subject { FakeController.new }
+
+  context "when the module is included" do
+    it "adds the :current_user helper method" do
+      expect(FakeController).to receive(:helper_method).with(:current_user)
+
+      FakeController.send(:include, Omniauth::Dsds::ControllerMethods)
+    end
+  end
 
   context "with no auth token in the session" do
     it "returns nil" do

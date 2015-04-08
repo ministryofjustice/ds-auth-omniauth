@@ -1,7 +1,7 @@
 module Omniauth
   module Dsds
     module ControllerMethods
-      def ControllerMethods.included(controller)
+      def self.included(controller)
         controller.helper_method :current_user
       end
 
