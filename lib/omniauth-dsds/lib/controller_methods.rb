@@ -1,6 +1,10 @@
 module Omniauth
   module Dsds
     module ControllerMethods
+      def ControllerMethods.included(controller)
+        controller.helper_method :current_user
+      end
+
       def current_user
         @current_user ||= fetch_current_user
       end
@@ -33,7 +37,7 @@ module Omniauth
       end
 
       def strategy_with_access_token(token: )
-        strategy.tap do |strat| 
+        strategy.tap do |strat|
           strat.access_token = OAuth2::AccessToken.new strat.client, token
         end
       end
