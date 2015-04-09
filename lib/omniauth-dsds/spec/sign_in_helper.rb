@@ -20,10 +20,8 @@ module Omniauth
           response_body = profile.reverse_merge({
             "user" => {
                 "id" => 1,
-                "first_name" => "Bob",
-                "last_name" => "Smith",
-                "username" => "bob.smith",
-                "email" => "bob.smith@world.com"
+                "email" => "bob.smith@world.com",
+                "uid" => "12345678-abcd-1234-abcd-1234567890"
             },
             "profile" => {
                 "name" => "Bob Smith",
