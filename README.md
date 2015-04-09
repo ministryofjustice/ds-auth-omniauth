@@ -20,7 +20,10 @@ Or install it yourself as:
 
 ## Usage
 
-Tell OmniAuth about this provider. For a Rails app, your `config/initializers/omniauth.rb` file should look like this:
+### Register provider
+
+Tell OmniAuth about this provider. For a Rails app, your
+`config/initializers/omniauth.rb` file should look like this:
 
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
@@ -30,15 +33,22 @@ end
 
 Replace `"API_KEY"` and `"API_SECRET"` with appropriate values.
 
-## Development
+### Controller mix-ins
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+Include the module in any controller:
+```ruby
+include Omniauth::Dsds::ControllerMethods
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+This will give access to a `current_user` method, which returns a User
+object representing the currently logged in user.
+
+It also provides a Devise-like `authenticate_user!` method, which redirects
+to the login workflow for the Authentication application.
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/omniauth-dsds/fork )
+1. Fork it (https://github.com/[my-github-username]/omniauth-dsds/fork)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
