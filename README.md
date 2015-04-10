@@ -7,7 +7,7 @@ This gem contains the DSDS strategy for OmniAuth.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'omniauth-dsds'
+gem "omniauth-dsds", github: "ministryofjustice/defence-request-service-omniauth-dsds", tag: "v0.3.0"
 ```
 
 And then execute:
@@ -27,11 +27,18 @@ Tell OmniAuth about this provider. For a Rails app, your
 
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :defence_request, API_KEY, API_SECRET
+  provider :defence_request, AUTH_KEY, AUTH_SECRET
 end
 ```
 
-Replace `"API_KEY"` and `"API_SECRET"` with appropriate values.
+Replace `AUTH_KEY` and `AUTH_SECRET` with appropriate values
+from the authentication service provider.
+
+You will need to set environment variables in order for the gem
+to know where the authentication service resides, and where Omniauth
+needs to redirect back to after authenticating. These should be set as
+`ENV[AUTHENTICATION_SITE_URL]` and `ENV[AUTHENTICATION_REDIRECT_URI]`
+respectively.
 
 ### Controller mix-ins
 
