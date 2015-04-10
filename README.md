@@ -14,10 +14,6 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install omniauth-dsds
-
 ## Usage
 
 ### Register provider
