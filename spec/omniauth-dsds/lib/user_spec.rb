@@ -34,5 +34,6 @@ RSpec.describe Omniauth::Dsds::User, ".build_from" do
     expect(user.uid).to   eq "12345678-abcd-1234-abcd-1234567890"
     expect(user.name).to  eq "Bob Smith"
     expect(user.email).to eq "bob.smith@world.com"
+    expect(user.roles).to eq ["admin", "foo", "bar"]
   end
 end
