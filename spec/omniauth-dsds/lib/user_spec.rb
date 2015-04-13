@@ -6,9 +6,7 @@ RSpec.describe Omniauth::Dsds::User, ".build_from" do
   it "builds a user from the auth hash" do
     auth_hash = {
       "user" => {
-          "id"    => 1,
           "email" => "bob.smith@world.com",
-          "uid"   => "12345678-abcd-1234-abcd-1234567890"
       },
       "profile" => {
           "name"      => "Bob Smith",
@@ -22,7 +20,8 @@ RSpec.describe Omniauth::Dsds::User, ".build_from" do
               "postcode" => ""
           },
           "PIN"              => "1234",
-          "organisation_ids" => [1,2]
+          "organisation_ids" => [1,2],
+          "uid"   => "12345678-abcd-1234-abcd-1234567890"
       },
       "roles" => [
           "admin", "foo", "bar"
