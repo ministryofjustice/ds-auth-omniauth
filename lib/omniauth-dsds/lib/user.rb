@@ -5,7 +5,7 @@ module Omniauth
 
       def self.build_from(auth_hash)
         new(
-          uid:   auth_hash.fetch("user").fetch("uid"),
+          uid:   auth_hash.fetch("profile").fetch("uid"),
           name:  auth_hash.fetch("profile").fetch("name"),
           email: auth_hash.fetch("profile").fetch("email"),
           roles: auth_hash.fetch("roles")

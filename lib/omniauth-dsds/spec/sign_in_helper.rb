@@ -8,7 +8,7 @@ module Omniauth
 
           OmniAuth.config.mock_auth[:defence_request] = OmniAuth::AuthHash.new({
             provider: "defence_request",
-            uid: "123456789",
+            uid: "12345678-abcd-1234-abcd-1234567890",
             credentials: {
               token: token,
             }
@@ -19,9 +19,7 @@ module Omniauth
 
           response_body = profile.reverse_merge({
             "user" => {
-                "id" => 1,
                 "email" => "bob.smith@world.com",
-                "uid" => "12345678-abcd-1234-abcd-1234567890"
             },
             "profile" => {
                 "name" => "Bob Smith",
@@ -35,7 +33,8 @@ module Omniauth
                     "postcode" => ""
                 },
                 "PIN" => "1234",
-                "organisation_ids" => [1,2]
+                "organisation_ids" => [1,2],
+                "uid" => "12345678-abcd-1234-abcd-1234567890"
             },
             "roles" => [
                 "admin", "foo", "bar"
