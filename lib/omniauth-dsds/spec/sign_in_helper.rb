@@ -15,9 +15,8 @@ module Omniauth
           })
         end
 
-        def mock_profile(token: "ABCDEF", profile: {}, authentication_site_url: "http://app.example.com")
-
-          response_body = profile.reverse_merge({
+        def mock_profile(options: {}, authentication_site_url: "http://app.example.com")
+          response_body = {
             "user" => {
                 "email" => "bob.smith@world.com",
             },
@@ -34,12 +33,10 @@ module Omniauth
                 },
                 "PIN" => "1234",
                 "organisation_ids" => [1,2],
-                "uid" => "12345678-abcd-1234-abcd-1234567890"
+                "uid" =>  options.fetch(:uid) { "12345678-abcd-1234-abcd-1234567890" }
             },
-            "roles" => [
-                "admin", "foo", "bar"
-            ]
-          }).to_json
+            "roles" => options.fetch(:roles) { ["admin", "foo", "bar"] }
+          }.to_json
 
           WebMock.stub_request(:get, authentication_site_url+'/api/v1/me').
             to_return(status: 200, body: response_body, headers: {} )
