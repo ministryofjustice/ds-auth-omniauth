@@ -20,7 +20,7 @@ RSpec.describe Omniauth::Dsds::User, ".build_from" do
               "postcode" => ""
           },
           "PIN"              => "1234",
-          "organisation_ids" => [1,2],
+          "organisation_uids" => ['UID1', 'UID2'],
           "uid"   => "12345678-abcd-1234-abcd-1234567890"
       },
       "roles" => [
@@ -34,5 +34,6 @@ RSpec.describe Omniauth::Dsds::User, ".build_from" do
     expect(user.name).to  eq "Bob Smith"
     expect(user.email).to eq "bob.smith@world.com"
     expect(user.roles).to eq ["admin", "foo", "bar"]
+    expect(user.organisation_uids).to eq ["UID1", "UID2"]
   end
 end
