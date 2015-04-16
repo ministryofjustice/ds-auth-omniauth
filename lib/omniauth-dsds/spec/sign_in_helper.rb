@@ -38,7 +38,7 @@ module Omniauth
             "roles" => options.fetch(:roles) { ["admin", "foo", "bar"] }
           }.to_json
 
-          WebMock.stub_request(:get, authentication_site_url+'/api/v1/me').
+          WebMock.stub_request(:get, authentication_site_url+'/api/v1/profiles/me').
             to_return(status: 200, body: response_body, headers: {} )
         end
       end

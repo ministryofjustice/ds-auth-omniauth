@@ -13,7 +13,7 @@ module OmniAuth
       uid { raw_info["profile"]["uid"] }
 
       def raw_info
-        @_raw_info ||= MultiJson.decode access_token.get("/api/v1/me").body
+        @_raw_info ||= MultiJson.decode access_token.get("/api/v1/profiles/me").body
       end
     end
   end
