@@ -32,7 +32,7 @@ module Omniauth
                     "postcode" => ""
                 },
                 "PIN" => "1234",
-                "organisation_ids" => [1,2],
+                "organisation_uids" => [1,2],
                 "uid" =>  options.fetch(:uid) { "12345678-abcd-1234-abcd-1234567890" }
             },
             "roles" => options.fetch(:roles) { ["admin", "foo", "bar"] }
