@@ -9,8 +9,8 @@ module Omniauth
           uid:   profile.fetch("uid"),
           name:  profile.fetch("name"),
           email: profile.fetch("email"),
-          roles: auth_hash.fetch("roles"),
-          organisation_uids: profile.fetch("organisation_uids")
+          roles: Array(auth_hash.fetch("roles")),
+          organisation_uids: Array(profile.fetch("organisation_uids"))
         )
       end
 
