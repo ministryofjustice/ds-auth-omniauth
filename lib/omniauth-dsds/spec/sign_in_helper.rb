@@ -21,10 +21,10 @@ module Omniauth
                 "email" => "bob.smith@world.com",
             },
             "profile" => {
-                "name" => "Bob Smith",
-                "email" => "bob.smith@world.com",
-                "telephone" => "0123456789",
-                "mobile" => "071234567",
+                "name" => options.fetch(:name) { "Bob Smith" },
+                "email" => options.fetch(:email) { "bob.smith@world.com" },
+                "telephone" => options.fetch(:telephone) { "0123456789" },
+                "mobile" => options.fetch(:mobile) { "071234567" },
                 "address" => {
                     "line1" => "",
                     "line2" => "",
@@ -32,7 +32,7 @@ module Omniauth
                     "postcode" => ""
                 },
                 "PIN" => "1234",
-                "organisation_uids" => [1,2],
+                "organisation_uids" => options.fetch(:organisation_uids) { ["12345678-bcde-1234-abcd-1234567890","12345678-cdef-1234-abcd-1234567890"] },
                 "uid" =>  options.fetch(:uid) { "12345678-abcd-1234-abcd-1234567890" }
             },
             "roles" => options.fetch(:roles) { ["admin", "foo", "bar"] }
