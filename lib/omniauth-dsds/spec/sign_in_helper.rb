@@ -29,7 +29,7 @@ module Omniauth
                 "full_address" => options.fetch(:full_address) { "" },
                 "postcode" => options.fetch(:postcode) { "" }
               },
-              "PIN" => "1234",
+              "PIN" => options.fetch(:pin) { "1234" },
               "organisation_uids" => options.fetch(:organisation_uids) { ["12345678-bcde-1234-abcd-1234567890","12345678-cdef-1234-abcd-1234567890"] },
               "uid" =>  options.fetch(:uid) { "12345678-abcd-1234-abcd-1234567890" }
             },
