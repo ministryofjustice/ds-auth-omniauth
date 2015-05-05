@@ -2,22 +2,6 @@ require "omniauth-oauth2"
 
 module OmniAuth
   module Strategies
-
-    module CallbackOverride
-      def callback_phase
-        if raw_info['roles'].nil? || raw_info['roles'].empty?
-          fail!(:unauthorized, OAuth2::CallbackError.new(:unauthorized, 'Unauthorized access'))
-        else
-          super
-        end
-      end
-    end
-
-    # Need to check roles after the access_token has been built by OmniAuth::OAuth2#callback_phase 
-    # but before the parent app is called by OmniAuth::Strategy#callback_phase
-    # so we place a module in the ancestors chain between them
-    OAuth2.send :include, CallbackOverride
-
     class DefenceRequest < OmniAuth::Strategies::OAuth2
       option :name, "defence_request"
 
