@@ -2,15 +2,21 @@ module Omniauth
   module Dsds
     class UserBuilder
 
-      class NullRawInfo < Hash
+      class NullRawInfo
         def initialize
-          self["profile"] = {
-            "uid" => "",
-            "name" => "",
-            "email" => "",
-            "organisation_uids" => []
+          @data = {
+            "profile" => {
+              "uid" => "",
+              "name" => "",
+              "email" => "",
+              "organisation_uids" => []
+            },
+            "roles" => []
           }
-          self['roles'] = []
+        end
+
+        def [](key)
+          @data[key]
         end
       end
 
