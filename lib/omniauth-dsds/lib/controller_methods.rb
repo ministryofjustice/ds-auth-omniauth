@@ -20,26 +20,23 @@ module Omniauth
       end
 
       def fetch_current_user
-        return nil unless access_token
-        build_user
-
-      rescue OAuth2::Error
-        reset_session
-        nil
+        build_user || (reset_session; nil)
       end
 
       def build_user
-        User.build_from strategy_with_access_token(token: access_token).raw_info
+        UserBuilder.new(
+          app_id:     authentication_application_id,
+          app_secret: authentication_application_secret,
+          token:      access_token
+        ).build_user
       end
 
-      def strategy
-        OmniAuth::Strategies::DefenceRequest.new ENV.fetch('AUTHENTICATION_APPLICATION_ID'), ENV.fetch('AUTHENTICATION_APPLICATION_SECRET')
+      def authentication_application_id
+        ENV.fetch('AUTHENTICATION_APPLICATION_ID')
       end
 
-      def strategy_with_access_token(token: )
-        strategy.tap do |strat|
-          strat.access_token = OAuth2::AccessToken.new strat.client, token
-        end
+      def authentication_application_secret
+        ENV.fetch('AUTHENTICATION_APPLICATION_SECRET')
       end
     end
   end

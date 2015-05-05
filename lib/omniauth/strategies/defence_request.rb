@@ -6,8 +6,8 @@ module OmniAuth
       option :name, "defence_request"
 
       option :client_options, {
-        site: ENV.fetch('AUTHENTICATION_SITE_URL'),
-        redirect_url: ENV.fetch('AUTHENTICATION_REDIRECT_URI')
+        site: ENV.fetch('AUTHENTICATION_SITE_URL', nil),
+        redirect_url: ENV.fetch('AUTHENTICATION_REDIRECT_URI', nil)
       }
 
       uid { raw_info["profile"]["uid"] }

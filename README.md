@@ -49,6 +49,10 @@ object representing the currently logged in user.
 It also provides a Devise-like `authenticate_user!` method, which redirects
 to the login workflow for the Authentication application.
 
+If the User does not have any roles for the application (as returned by the profile API response) then the session will be cleared and the User redirected to the login page.
+
+Override the authentication_application_id and authentication_application_secret methods to customize where OAuth credentials are loaded from.
+
 ## Contributing
 
 1. Fork it (https://github.com/[my-github-username]/omniauth-dsds/fork)
