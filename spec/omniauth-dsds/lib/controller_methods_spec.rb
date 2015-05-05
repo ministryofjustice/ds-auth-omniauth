@@ -77,6 +77,7 @@ RSpec.describe Omniauth::Dsds::ControllerMethods do
           hash_including(
             app_id: ENV['AUTHENTICATION_APPLICATION_ID'],
             app_secret: ENV['AUTHENTICATION_APPLICATION_SECRET'],
+            token: access_token
           )
         ).and_return user_builder
 
@@ -85,7 +86,7 @@ RSpec.describe Omniauth::Dsds::ControllerMethods do
 
       it "uses the UserBuilder instance and access_token to load the user profile" do
         expect(Omniauth::Dsds::UserBuilder).to receive(:new).and_return user_builder
-        expect(user_builder).to receive(:build_user).with(access_token).and_return fake_user
+        expect(user_builder).to receive(:build_user).and_return fake_user
 
         expect(subject.current_user).to eq fake_user
       end

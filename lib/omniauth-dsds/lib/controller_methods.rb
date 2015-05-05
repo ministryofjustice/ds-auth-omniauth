@@ -26,8 +26,9 @@ module Omniauth
       def build_user
         UserBuilder.new(
           app_id:     authentication_application_id,
-          app_secret: authentication_application_secret
-        ).build_user access_token
+          app_secret: authentication_application_secret,
+          token:      access_token
+        ).build_user
       end
 
       def authentication_application_id

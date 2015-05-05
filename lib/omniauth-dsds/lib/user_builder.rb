@@ -20,12 +20,13 @@ module Omniauth
         end
       end
 
-      def initialize(app_id:, app_secret:)
-        app_id = app_id
-        app_secret = app_secret
+      def initialize(app_id:, app_secret:, token:)
+        @app_id = app_id
+        @app_secret = app_secret
+        @token = token
       end
 
-      def build_user(token)
+      def build_user
         return nil unless token
 
         raw_info = fetch_raw_info(token)
@@ -37,7 +38,7 @@ module Omniauth
 
       private
 
-      attr_reader :access_token, :app_id, :app_secret
+      attr_reader :token, :app_id, :app_secret
 
       def strategy
         OmniAuth::Strategies::DefenceRequest.new app_id, app_secret
