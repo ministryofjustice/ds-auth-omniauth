@@ -1,6 +1,6 @@
 # Omniauth::Dsds
 
-This gem contains the DSDS strategy for OmniAuth.
+This gem contains the OmniAuth strategy to authenticate against the [DRS Authentication provider](https://github.com/ministryofjustice/defence-request-service-auth).
 
 ## Installation
 
@@ -33,8 +33,11 @@ from the authentication service provider.
 You will need to set environment variables in order for the gem
 to know where the authentication service resides, and where Omniauth
 needs to redirect back to after authenticating. These should be set as
-`ENV[AUTHENTICATION_SITE_URL]` and `ENV[AUTHENTICATION_REDIRECT_URI]`
+`ENV['AUTHENTICATION_SITE_URL']` and `ENV['AUTHENTICATION_REDIRECT_URI']`
 respectively.
+
+The user details endpoint on the authentication provider will default to
+`/api/v1/me` but can be overridden by setting `ENV['AUTHENTICATION_RAW_INFO_PATH']`
 
 ### Controller mix-ins
 
@@ -52,6 +55,13 @@ to the login workflow for the Authentication application.
 If the User does not have any roles for the application (as returned by the profile API response) then the session will be cleared and the User redirected to the login page.
 
 Override the authentication_application_id and authentication_application_secret methods to customize where OAuth credentials are loaded from.
+
+### Authorization
+If the current_user does not have permission to access the application then the Authentication provider will redirect to `auth/failure?message=unauthorized` rather than the success route. See [https://github.com/intridea/omniauth/wiki](https://github.com/intridea/omniauth/wiki)
+
+### Debugging
+It can be handy to see exactly what requests are being made to the authentication provider.
+Set `ENV['OAUTH_DEBUG']` to enable debug logging.
 
 ## Contributing
 

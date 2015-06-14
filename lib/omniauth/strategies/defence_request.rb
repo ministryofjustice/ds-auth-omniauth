@@ -22,13 +22,31 @@ module OmniAuth
 
       option :client_options, {
         site: ENV.fetch('AUTHENTICATION_SITE_URL', nil),
-        redirect_url: ENV.fetch('AUTHENTICATION_REDIRECT_URI', nil)
+        redirect_url: ENV.fetch('AUTHENTICATION_REDIRECT_URI', nil),
+        raw_info_path: ENV.fetch("AUTHENTICATION_RAW_INFO_PATH") { "/api/v1/me" }
       }
 
-      uid { raw_info["profile"]["uid"] }
+      uid { raw_info["user"]["uid"] }
 
       def raw_info
-        @_raw_info ||= MultiJson.decode access_token.get("/api/v1/profiles/me").body
+        log_request
+        @_raw_info ||= MultiJson.decode access_token.get(raw_info_path).body
+      end
+
+      private
+
+      def raw_info_path
+        options.client_options.raw_info_path
+      end
+
+      def full_raw_info_url
+        options.client_options.site + raw_info_path
+      end
+
+      def log_request
+        return unless ENV["OAUTH_DEBUG"]
+
+        log :debug, "curl -H \"Accept: application/json\" -H \"Authorization: Bearer #{access_token.token}\" #{full_raw_info_url}"
       end
     end
   end
