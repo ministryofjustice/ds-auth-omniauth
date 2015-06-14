@@ -5,7 +5,7 @@ module Omniauth
       class NullRawInfo
         def initialize
           @data = {
-            "profile" => {
+            "user" => {
               "uid" => "",
               "name" => "",
               "email" => "",

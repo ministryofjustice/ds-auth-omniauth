@@ -6,9 +6,6 @@ RSpec.describe Omniauth::Dsds::User, ".build_from" do
   it "builds a user from the auth hash" do
     auth_hash = {
       "user" => {
-          "email" => "bob.smith@world.com",
-      },
-      "profile" => {
           "name"      => "Bob Smith",
           "email"     => "bob.smith@world.com",
           "telephone" => "0123456789",
