@@ -6,8 +6,8 @@ require "omniauth-dsds/version"
 Gem::Specification.new do |spec|
   spec.name          = "omniauth-dsds"
   spec.version       = Omniauth::Dsds::VERSION
-  spec.authors       = ["Chris Carter", "Pedro Moreira"]
-  spec.email         = ["chris.carter@unboxedconsulting.com", "pedro.moreira@unboxedconsulting.com"]
+  spec.authors       = ["Chris Carter", "Pedro Moreira", "Anson Kelly"]
+  spec.email         = ["chris.carter@unboxedconsulting.com", "pedro.moreira@unboxedconsulting.com", "ansonkelly@gmail.com"]
 
   spec.summary       = %q{ Omniauth strategy for Defence Request Service oAuth2 provider }
   spec.description   = %q{ Omniauth strategy for Defence Request Service oAuth2 provider }
