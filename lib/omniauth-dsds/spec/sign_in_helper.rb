@@ -18,9 +18,6 @@ module Omniauth
         def mock_profile(options: {}, authentication_site_url: "http://app.example.com")
           response_body = {
             "user" => {
-              "email" => "bob.smith@world.com",
-            },
-            "profile" => {
               "name" => options.fetch(:name) { "Bob Smith" },
               "email" => options.fetch(:email) { "bob.smith@world.com" },
               "telephone" => options.fetch(:telephone) { "0123456789" },
@@ -36,7 +33,7 @@ module Omniauth
             "roles" => options.fetch(:roles) { ["admin", "foo", "bar"] }
           }.to_json
 
-          WebMock.stub_request(:get, authentication_site_url+'/api/v1/profiles/me').
+          WebMock.stub_request(:get, authentication_site_url+'/api/v1/me').
             to_return(status: 200, body: response_body, headers: {} )
         end
       end
