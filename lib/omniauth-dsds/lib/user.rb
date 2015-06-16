@@ -1,7 +1,7 @@
 module Omniauth
   module Dsds
     class User
-      attr_reader :uid, :email, :name, :roles, :organisation_uids
+      attr_reader :uid, :email, :name, :organisations
 
       def self.build_from(auth_hash)
         user = auth_hash.fetch("user")
@@ -9,17 +9,15 @@ module Omniauth
           uid:   user.fetch("uid"),
           name:  user.fetch("name"),
           email: user.fetch("email"),
-          roles: Array(auth_hash.fetch("roles")),
-          organisation_uids: Array(user.fetch("organisation_uids"))
+          organisations: Array(user.fetch("organisations"))
         )
       end
 
-      def initialize(uid:, name:, email:, roles:, organisation_uids:)
+      def initialize(uid:, name:, email:, organisations:)
         @uid   = uid
         @name  = name
         @email = email
-        @roles = roles
-        @organisation_uids = organisation_uids
+        @organisations = organisations
       end
     end
   end
