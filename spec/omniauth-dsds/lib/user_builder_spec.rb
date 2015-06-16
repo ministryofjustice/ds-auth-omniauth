@@ -25,10 +25,22 @@ RSpec.describe Omniauth::Dsds::UserBuilder, "#build_user" do
     allow(subject).to receive(:fetch_raw_info).with(token).and_return raw_info_response
   end
 
-  let(:roles) { ['cso'] }
-  let(:raw_info_response) { { "roles" => roles } }
+  let(:roles) { ["cso"] }
+  let(:raw_info_response) do
+    {
+        "organisations" => [
+            {
+                "uid" => "UID1",
+                "roles" => roles
+            },
+            {
+                "uid" => "UID2"
+            }
+        ]
+    }
+  end
 
-  context "when raw_info has no roles" do
+  context "when raw_info has no roles for any of the organisations" do
     let(:roles) { [] }
 
     it "returns nil" do
@@ -36,7 +48,15 @@ RSpec.describe Omniauth::Dsds::UserBuilder, "#build_user" do
     end
   end
 
-  context "when raw_info has roles" do
+  context "when raw_info has no organisations" do
+    let(:raw_info_response) { {"organisations" => [] } }
+
+    it "returns nil" do
+      expect(subject.build_user).to be_nil
+    end
+  end
+
+  context "when raw_info has roles for at least one organisation" do
     it "returns a new User object" do
       stub_user = double("User")
       expect(Omniauth::Dsds::User).to receive(:build_from).with(raw_info_response).and_return stub_user

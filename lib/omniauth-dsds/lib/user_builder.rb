@@ -31,9 +31,7 @@ module Omniauth
 
         raw_info = fetch_raw_info(token)
 
-        unless raw_info['roles'].nil? || raw_info['roles'].empty?
-          User.build_from raw_info
-        end
+        User.build_from(raw_info) if has_roles?(raw_info)
       end
 
       private
@@ -56,6 +54,12 @@ module Omniauth
 
         rescue OAuth2::Error
           NullRawInfo.new
+      end
+
+      def has_roles?(raw_info)
+        raw_info["organisations"].any? do |organisation|
+          !organisation['roles'].nil? && !organisation['roles'].empty?
+        end
       end
     end
   end
