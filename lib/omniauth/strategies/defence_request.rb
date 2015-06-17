@@ -13,7 +13,7 @@ module OmniAuth
 
       def has_roles?(raw_info)
         raw_info["user"]["organisations"].any? do |organisation|
-          !organisation['roles'].nil? && !organisation['roles'].empty?
+          !organisation["roles"].nil? && !organisation["roles"].empty?
         end
       end
     end

@@ -9,7 +9,7 @@ module Omniauth
               "uid" => "",
               "name" => "",
               "email" => "",
-              "organisation_uids" => []
+              "organisations" => []
             },
             "roles" => []
           }
@@ -57,8 +57,6 @@ module Omniauth
       end
 
       def has_roles?(raw_info)
-        return false unless raw_info.has_key?("user") && raw_info["user"].has_key?("organisations")
-
         raw_info["user"]["organisations"].any? do |organisation|
           !organisation["roles"].nil? && !organisation["roles"].empty?
         end
