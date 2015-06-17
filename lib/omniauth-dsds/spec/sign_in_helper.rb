@@ -27,10 +27,18 @@ module Omniauth
                 "postcode" => options.fetch(:postcode) { "" }
               },
               "PIN" => options.fetch(:pin) { "1234" },
-              "organisation_uids" => options.fetch(:organisation_uids) { ["12345678-bcde-1234-abcd-1234567890","12345678-cdef-1234-abcd-1234567890"] },
+              "organisations" => options.fetch(:organisations) do
+                [
+                    {
+                        "uid" => "12345678-bcde-1234-abcd-1234567890",
+                        "name" => "SOME ORGANISATION",
+                        "type" => %w(custody_suite law_firm).sample,
+                        "roles" => %w(admin foo bar)
+                    }
+                ]
+              end,
               "uid" =>  options.fetch(:uid) { "12345678-abcd-1234-abcd-1234567890" }
-            },
-            "roles" => options.fetch(:roles) { ["admin", "foo", "bar"] }
+            }
           }.to_json
 
           WebMock.stub_request(:get, authentication_site_url+'/api/v1/me').
