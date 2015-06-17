@@ -57,15 +57,17 @@ describe "defence_request strategy" do
 
     context "when the ENV[\"OAUTH_DEBUG\"] flag is set" do
       it "prints the user details request as a curl command" do
-        allow(ENV).to receive(:[]).with("OAUTH_DEBUG").and_return "true"
-        expect(subject).to receive(:log).with(:debug, "curl -H \"Accept: application/json\" -H \"Authorization: Bearer #{token}\" https://example.com/api/v42/foobars")
+        allow(ENV).to receive(:[]).with("AUTH_DEBUG").and_return "true"
+        expect(subject).to receive(:puts).with("\nhttps://example.com/api/v42/foobars result:")
+        expect(subject).to receive(:pp).with({"fake" => "response"})
+        expect(subject).to receive(:puts).with("curl -H \"Accept: application/json\" -H \"Authorization: Bearer #{token}\" https://example.com/api/v42/foobars\n\n")
         subject.raw_info
       end
     end
 
     context "when the ENV[\"OAUTH_DEBUG\"] flag is not set" do
       it "does not print user details request" do
-        allow(ENV).to receive(:[]).with("OAUTH_DEBUG").and_return nil
+        allow(ENV).to receive(:[]).with("AUTH_DEBUG").and_return nil
         expect(subject).not_to receive(:log)
         subject.raw_info
       end
