@@ -11,15 +11,17 @@ RSpec.describe Omniauth::Dsds::UserBuilder, "#build_user" do
   let(:roles) { ["cso"] }
   let(:raw_info_response) do
     {
+      "user" => {
         "organisations" => [
-            {
-                "uid" => "UID1",
-                "roles" => roles
-            },
-            {
-                "uid" => "UID2"
-            }
+          {
+            "uid" => "UID1",
+            "roles" => roles
+          },
+          {
+            "uid" => "UID2"
+          }
         ]
+      }
     }
   end
 
@@ -42,7 +44,7 @@ RSpec.describe Omniauth::Dsds::UserBuilder, "#build_user" do
   end
 
   context "when raw_info has no organisations" do
-    let(:raw_info_response) { {"organisations" => [] } }
+    let(:raw_info_response) { { "user" => {"organisations" => [] } } }
 
     it { is_expected.to be nil }
   end
