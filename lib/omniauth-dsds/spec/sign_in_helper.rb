@@ -32,7 +32,7 @@ module Omniauth
                     {
                         "uid" => "12345678-bcde-1234-abcd-1234567890",
                         "name" => "SOME ORGANISATION",
-                        "type" => %w(custody_suite law_firm).sample,
+                        "type" => options.fetch(:organisation_type) { "custody_suite" },
                         "roles" => %w(admin foo bar)
                     }
                 ]
