@@ -4,10 +4,16 @@ module OmniAuth
   module Strategies
     module CallbackOverride
       def callback_phase
-        if raw_info["roles"].nil? || raw_info["roles"].empty?
+        unless has_roles?(raw_info)
           fail!(:unauthorized, OAuth2::CallbackError.new(:unauthorized, 'Unauthorized access'))
         else
           super
+        end
+      end
+
+      def has_roles?(raw_info)
+        raw_info["user"]["organisations"].any? do |organisation|
+          !organisation["roles"].nil? && !organisation["roles"].empty?
         end
       end
     end
