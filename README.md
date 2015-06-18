@@ -61,7 +61,7 @@ If the current_user does not have permission to access the application then the 
 
 ### Debugging
 It can be handy to see exactly what requests are being made to the authentication provider.
-Set `ENV['OAUTH_DEBUG']` to enable debug logging.
+Set `ENV['AUTH_DEBUG']` to enable debug logging.
 
 ## Contributing
 

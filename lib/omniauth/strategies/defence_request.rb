@@ -29,8 +29,9 @@ module OmniAuth
       uid { raw_info["user"]["uid"] }
 
       def raw_info
-        log_request
         @_raw_info ||= MultiJson.decode access_token.get(raw_info_path).body
+        log_request
+        @_raw_info
       end
 
       private
@@ -44,9 +45,12 @@ module OmniAuth
       end
 
       def log_request
-        return unless ENV["OAUTH_DEBUG"]
+        return unless ENV["AUTH_DEBUG"]
 
-        log :debug, "curl -H \"Accept: application/json\" -H \"Authorization: Bearer #{access_token.token}\" #{full_raw_info_url}"
+        require 'pp'
+        puts "\n#{full_raw_info_url} result:"
+        pp @_raw_info
+        puts "curl -H \"Accept: application/json\" -H \"Authorization: Bearer #{access_token.token}\" #{full_raw_info_url}\n\n"
       end
     end
   end
