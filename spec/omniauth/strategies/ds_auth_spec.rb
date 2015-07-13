@@ -1,14 +1,14 @@
-ENV['AUTHENTICATION_SITE_URL'] = 'https://example.com'
-ENV['AUTHENTICATION_REDIRECT_URI'] = 'https://example.com/redirect_url'
-ENV['AUTHENTICATION_RAW_INFO_PATH'] = "/api/v42/foobars"
+ENV['DS_AUTH_SITE_URL'] = 'https://example.com'
+ENV['DS_AUTH_REDIRECT_URI'] = 'https://example.com/redirect_url'
+ENV['DS_AUTH_RAW_INFO_PATH'] = "/api/v42/foobars"
 
 require 'spec_helper'
-require 'omniauth-dsds'
+require 'ds-auth-omniauth'
 
-describe "defence_request strategy" do
+describe "ds_auth strategy" do
   subject do
     args = ['appid', 'secret', @options || {}].compact
-    OmniAuth::Strategies::DefenceRequest.new(*args).tap do |strategy|
+    OmniAuth::Strategies::DsAuth.new(*args).tap do |strategy|
       allow(strategy).to receive(:request) {
         request
       }
@@ -19,7 +19,7 @@ describe "defence_request strategy" do
 
   describe 'client options' do
     it 'should have correct name' do
-      expect(subject.options.name).to eq('defence_request')
+      expect(subject.options.name).to eq('ds_auth')
     end
 
     it 'should have correct site pulled from the environment' do
@@ -57,7 +57,7 @@ describe "defence_request strategy" do
 
     context "when the ENV[\"OAUTH_DEBUG\"] flag is set" do
       it "prints the user details request as a curl command" do
-        allow(ENV).to receive(:[]).with("AUTH_DEBUG").and_return "true"
+        allow(ENV).to receive(:[]).with("DS_AUTH_DEBUG").and_return "true"
         expect(subject).to receive(:puts).with("\nhttps://example.com/api/v42/foobars result:")
         expect(subject).to receive(:pp).with({"fake" => "response"})
         expect(subject).to receive(:puts).with("curl -H \"Accept: application/json\" -H \"Authorization: Bearer #{token}\" https://example.com/api/v42/foobars\n\n")
@@ -67,7 +67,7 @@ describe "defence_request strategy" do
 
     context "when the ENV[\"OAUTH_DEBUG\"] flag is not set" do
       it "does not print user details request" do
-        allow(ENV).to receive(:[]).with("AUTH_DEBUG").and_return nil
+        allow(ENV).to receive(:[]).with("DS_AUTH_DEBUG").and_return nil
         expect(subject).not_to receive(:log)
         subject.raw_info
       end

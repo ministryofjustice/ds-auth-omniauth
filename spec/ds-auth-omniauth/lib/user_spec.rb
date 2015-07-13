@@ -1,8 +1,8 @@
 require "spec_helper"
-require_relative "../../../lib/omniauth-dsds/lib/user"
+require_relative "../../../lib/ds-auth-omniauth/lib/user"
 require "omniauth"
 
-RSpec.describe Omniauth::Dsds::User, ".build_from" do
+RSpec.describe DsAuth::Omniauth::User, ".build_from" do
   it "builds a user from the auth hash" do
     organisation_1 = {
         "uuid" => "CUSTODY-SUITE-UID",
@@ -34,7 +34,7 @@ RSpec.describe Omniauth::Dsds::User, ".build_from" do
       }
     }
 
-    user = Omniauth::Dsds::User.build_from auth_hash
+    user = DsAuth::Omniauth::User.build_from auth_hash
 
     expect(user.uid).to   eq "12345678-abcd-1234-abcd-1234567890"
     expect(user.name).to  eq "Bob Smith"
