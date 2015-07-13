@@ -38,7 +38,8 @@ RUN echo "deb http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu trusty main" > /
 #
 ADD Gemfile /tmp/gemfile-when-docker-image-built/Gemfile
 ADD Gemfile.lock /tmp/gemfile-when-docker-image-built/Gemfile.lock
-ADD ds-auth-omniauth.gemspec /tmp/gemfile-when-docker-image-build/ds-auth-omniauth.gemspec
+ADD ds-auth-omniauth.gemspec /tmp/gemfile-when-docker-image-built/ds-auth-omniauth.gemspec
+ADD lib/ds-auth-omniauth/version.rb /tmp/gemfile-when-docker-image-built/lib/ds-auth-omniauth/version.rb
 RUN bundle install --gemfile=/tmp/gemfile-when-docker-image-built/Gemfile && /usr/local/bin/clean-up-docker-container
 
 ###############################################################################
@@ -50,4 +51,4 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 # Run specs by default
-CMD ["bin/bundle", "exec", "rake", "--trace"]
+CMD ["bundle", "exec", "rake", "--trace"]
