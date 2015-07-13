@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "omniauth-dsds/version"
+require "ds-auth-omniauth/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "omniauth-dsds"
-  spec.version       = Omniauth::Dsds::VERSION
+  spec.name          = "ds-auth-omniauth"
+  spec.version       = DsAuth::Omniauth::VERSION
   spec.authors       = ["Chris Carter", "Pedro Moreira", "Anson Kelly"]
   spec.email         = ["chris.carter@unboxedconsulting.com", "pedro.moreira@unboxedconsulting.com", "ansonkelly@gmail.com"]
 
-  spec.summary       = %q{ Omniauth strategy for Defence Request Service oAuth2 provider }
-  spec.description   = %q{ Omniauth strategy for Defence Request Service oAuth2 provider }
+  spec.summary       = %q{ Omniauth strategy for MoJ Digital SSO provider }
+  spec.description   = %q{ Omniauth strategy for MoJ Digital SSO provider }
   spec.homepage      = ""
   spec.license       = "MIT"
 

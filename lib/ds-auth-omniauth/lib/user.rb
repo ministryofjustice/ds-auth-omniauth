@@ -1,5 +1,5 @@
-module Omniauth
-  module Dsds
+module DsAuth
+  module Omniauth
     class User
       attr_reader :uid, :email, :name, :organisations
 

@@ -1,5 +1,5 @@
-module Omniauth
-  module Dsds
+module DsAuth
+  module Omniauth
     module ControllerMethods
       def self.included(controller)
         controller.helper_method :current_user
@@ -12,7 +12,7 @@ module Omniauth
       protected
 
       def authenticate_user!
-        redirect_to "/auth/defence_request" unless current_user
+        redirect_to "/auth/ds_auth" unless current_user
       end
 
       def access_token
@@ -32,11 +32,11 @@ module Omniauth
       end
 
       def authentication_application_id
-        ENV.fetch('AUTHENTICATION_APPLICATION_ID')
+        ENV.fetch('DS_AUTH_APPLICATION_ID')
       end
 
       def authentication_application_secret
-        ENV.fetch('AUTHENTICATION_APPLICATION_SECRET')
+        ENV.fetch('DS_AUTH_APPLICATION_SECRET')
       end
     end
   end

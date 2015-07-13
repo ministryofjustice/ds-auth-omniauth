@@ -23,13 +23,13 @@ module OmniAuth
     # so we place a module in the ancestors chain between them
     OAuth2.send :include, CallbackOverride
 
-    class DefenceRequest < OmniAuth::Strategies::OAuth2
-      option :name, "defence_request"
+    class DsAuth < OmniAuth::Strategies::OAuth2
+      option :name, "ds_auth"
 
       option :client_options, {
-        site: ENV.fetch('AUTHENTICATION_SITE_URL', nil),
-        redirect_url: ENV.fetch('AUTHENTICATION_REDIRECT_URI', nil),
-        raw_info_path: ENV.fetch("AUTHENTICATION_RAW_INFO_PATH") { "/api/v1/me" }
+        site: ENV.fetch('DS_AUTH_SITE_URL', nil),
+        redirect_url: ENV.fetch('DS_AUTH_REDIRECT_URI', nil),
+        raw_info_path: ENV.fetch("DS_AUTH_RAW_INFO_PATH") { "/api/v1/me" }
       }
 
       uid { raw_info["user"]["uid"] }
@@ -51,7 +51,7 @@ module OmniAuth
       end
 
       def log_request
-        return unless ENV["AUTH_DEBUG"]
+        return unless ENV["DS_AUTH_DEBUG"]
 
         require 'pp'
         puts "\n#{full_raw_info_url} result:"

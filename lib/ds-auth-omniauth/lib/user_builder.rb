@@ -1,5 +1,5 @@
-module Omniauth
-  module Dsds
+module DsAuth
+  module Omniauth
     class UserBuilder
 
       class NullRawInfo
@@ -39,7 +39,7 @@ module Omniauth
       attr_reader :token, :app_id, :app_secret
 
       def strategy
-        OmniAuth::Strategies::DefenceRequest.new app_id, app_secret
+        OmniAuth::Strategies::DsAuth.new app_id, app_secret
       end
 
       def strategy_with_access_token(token: )
