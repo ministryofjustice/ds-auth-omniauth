@@ -5,16 +5,14 @@ require "omniauth"
 RSpec.describe DsAuth::Omniauth::User, ".build_from" do
   it "builds a user from the auth hash" do
     organisation_1 = {
-        "uuid" => "CUSTODY-SUITE-UID",
+        "uid" => "CUSTODY-SUITE-UID",
         "name" => "Custody Suite London",
-        "type" => "custody_suite",
-        "roles" => ["cso", "admin"]
+        "roles" => ["user", "admin"]
     }
     organisation_2 = {
-        "uuid" => "LAW-FIRM-UID",
+        "uid" => "LAW-FIRM-UID",
         "name" => "Law Firm Blecthley",
-        "type" => "law_firm",
-        "roles" => ["solicitor"]
+        "roles" => ["viewer"]
     }
     auth_hash = {
       "user" => {
@@ -23,12 +21,9 @@ RSpec.describe DsAuth::Omniauth::User, ".build_from" do
           "telephone" => "0123456789",
           "mobile"    => "071234567",
           "address"   => {
-              "line1"    => "",
-              "line2"    => "",
-              "city"     => "",
-              "postcode" => ""
+              "full_address" => "1 Fake Street",
+              "postcode" => "AB1 2CD"
           },
-          "PIN"              => "1234",
           "organisations" => [ organisation_1, organisation_2 ],
           "uid"   => "12345678-abcd-1234-abcd-1234567890"
       }
@@ -36,9 +31,11 @@ RSpec.describe DsAuth::Omniauth::User, ".build_from" do
 
     user = DsAuth::Omniauth::User.build_from auth_hash
 
-    expect(user.uid).to   eq "12345678-abcd-1234-abcd-1234567890"
-    expect(user.name).to  eq "Bob Smith"
-    expect(user.email).to eq "bob.smith@world.com"
+    expect(user.uid).to    eq "12345678-abcd-1234-abcd-1234567890"
+    expect(user.name).to   eq "Bob Smith"
+    expect(user.email).to  eq "bob.smith@world.com"
+    expect(user.phone).to  eq "0123456789"
+    expect(user.mobile).to eq "071234567"
     expect(user.organisations).to match_array([organisation_1, organisation_2])
   end
 end

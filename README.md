@@ -139,7 +139,21 @@ Here is the format of the ```request.env['omniauth.auth']``` hash:
 {
   "provider"=>"ds_auth",
   "uid"=>"4d663e19-8e63-4cd0-800d-dabdc3f51fe5",
-  "info"=>{},
+  "info"=>{
+    "name" => "Bob Smith",
+    "email" => "bob@example.com",
+    "phone" => "02071234567",
+    "mobile" => "071234567",
+    "full_address" => "1 Fake Steet",
+    "postcode" => "AB1 2CD",
+    "organisations" => [
+      {
+        "uid" => "b2e402e4-6e44-485b-87b8-b47343cfbedb",
+        "name" => "Bobs Company",
+        "roles" => ["admin", "viewer"]
+      }
+    ]
+  },
   "credentials"=>{
     "token"=>"41f7784aa87373426d0990cf8ed97203a0c20856bf83a77ca62fcbe302377710",
     "expires_at"=>1436871976,
@@ -151,11 +165,14 @@ Here is the format of the ```request.env['omniauth.auth']``` hash:
 
 Notes:
 
-* uid is the unique identifer for the current user
+* *uid* is the unique identifer for the current user
+* *organisations* is the list of organisations this user belongs to, with the roles that user has within *that* organisation
+* a User may belong to multiple organisations, with multiple roles in each
 
 
 ### Authorization
-If the User does not have any roles for the application (as returned by the profile API response) then the session will be cleared and the User redirected to the authentication error page.
+If the User does not have any roles for the application (as returned by the profile API response) then the organisations array will be empty.
+It is up to the consuming application to decide what to do then.
 
 Likewise if configured in the Auth App if current_user does not have permission to access the application then the Authentication provider will redirect to `auth/failure?message=unauthorized` rather than the sessions#create route. See [https://github.com/intridea/omniauth/wiki](https://github.com/intridea/omniauth/wiki)
 

@@ -1,0 +1,20 @@
+{
+  "uid":"4d663e19-8e63-4cd0-800d-dabdc3f51fe5",
+  "user":{
+    "email":"bob@example.com",
+    "name":"Bob Smith",
+    "telephone":"01234567890",
+    "mobile":"07123456789",
+    "address":{
+      "full_address":"1 Fake Street",
+      "postcode":"AB1 2CD"
+    }
+  },
+  "organisations":[
+    {
+      "uid":"b2e402e4-6e44-485b-87b8-b47343cfbedb",
+      "name":"Bobs Company",
+      "roles":["admin", "viewer"]
+    }
+  ]
+}
