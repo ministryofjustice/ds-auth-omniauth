@@ -7,7 +7,7 @@ This gem contains the OmniAuth strategy to authenticate against the [MoJ Digital
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "ds-auth-omniauth", github: "ministryofjustice/ds-auth-omniauth", tag: "v0.9.0"
+gem "ds-auth-omniauth", github: "ministryofjustice/ds-auth-omniauth", tag: "v0.10.0"
 ```
 
 And then execute:
