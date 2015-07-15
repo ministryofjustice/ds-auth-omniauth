@@ -6,8 +6,8 @@ module Omniauth
         def mock_token(token: "ABCDEF")
           OmniAuth.config.test_mode = true
 
-          OmniAuth.config.mock_auth[:defence_request] = OmniAuth::AuthHash.new({
-            provider: "defence_request",
+          OmniAuth.config.mock_auth[:ds_auth] = OmniAuth::AuthHash.new({
+            provider: "ds_auth",
             uid: "12345678-abcd-1234-abcd-1234567890",
             credentials: {
               token: token,
