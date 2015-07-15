@@ -49,7 +49,7 @@ Include the helper module and before_action in your ApplicationController:
 ```ruby
 # app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
-  include Omniauth::Dsds::ControllerMethods
+  include DsAuth::Omniauth::ControllerMethods
   before_action :authenticate_user!
 
   # other controller stuff ...
@@ -92,7 +92,7 @@ end
 
 ### Storing Current User Locally
 
-The Omniauth::Dsds::ControllerMethods mixin will also give access to a `current_user` method, which returns a User
+The DsAuth::Omniauth::ControllerMethods mixin will also give access to a `current_user` method, which returns a User
 object representing the currently logged in user. This will return a DsAuth::Omniauth::User instance.
 
 This relies on the session containing the user_token (see above). The current_user will be fetched on every request.
@@ -121,7 +121,7 @@ end
 
 # app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
-  include Omniauth::Dsds::ControllerMethods
+  include DsAuth::Omniauth::ControllerMethods
   before_action :authenticate_user!
 
   def current_user
