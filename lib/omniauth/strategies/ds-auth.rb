@@ -21,7 +21,7 @@ module OmniAuth
           "mobile" => raw_info["user"]["mobile"],
           "full_address" => raw_info["user"]["address"]["full_address"],
           "postcode" => raw_info["user"]["address"]["postcode"],
-          "organisations" => raw_info["organisations"]
+          "organisations" => raw_info["user"]["organisations"]
         }
       end
 

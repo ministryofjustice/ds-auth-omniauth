@@ -200,7 +200,7 @@ class SessionsController < ApplicationController
   end
 
   def has_role?
-    auth_hash.fetch(:organisations).flat_map { |o| o[:roles] }.any?
+    auth_hash.fetch(:info).fetch(:organisations).flat_map { |o| o.roles }.any?
   end
 end
 ```

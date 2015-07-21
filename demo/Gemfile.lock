@@ -1,7 +1,5 @@
-GIT
-  remote: git://github.com/ministryofjustice/ds-auth-omniauth.git
-  revision: 94b2ca7323442e806d847b65a416671ba83b6b45
-  tag: v0.10.0
+PATH
+  remote: ../
   specs:
     ds-auth-omniauth (0.10.0)
       multi_json (~> 1.11.0)
