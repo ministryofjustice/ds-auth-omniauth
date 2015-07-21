@@ -8,13 +8,13 @@
     "address":{
       "full_address":"1 Fake Street",
       "postcode":"AB1 2CD"
-    }
-  },
-  "organisations":[
-    {
-      "uid":"b2e402e4-6e44-485b-87b8-b47343cfbedb",
-      "name":"Bobs Company",
-      "roles":["admin", "viewer"]
-    }
-  ]
+    },
+    "organisations":[
+      {
+        "uid":"b2e402e4-6e44-485b-87b8-b47343cfbedb",
+        "name":"Bobs Company",
+        "roles":["admin", "viewer"]
+      }
+    ]
+  }
 }
