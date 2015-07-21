@@ -175,7 +175,35 @@ The User object will be returned regardless of whether they have access
 to the application. It is up to the consuming app to decide how this
 should be handled.
 
-Likewise if configured in the Auth App if current_user does not have permission to access the application then the Authentication provider will redirect to `auth/failure?message=unauthorized` rather than the sessions#create route. See [https://github.com/intridea/omniauth/wiki](https://github.com/intridea/omniauth/wiki)
+For example, in the simple case of checking if the user has any role:
+
+```ruby
+# app/controllers/sessions_controller.rb
+class SessionsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:create, :failure]
+
+  def create
+    # This is needed to fetch the current_user object
+    if has_role?
+      session[:user_token] = auth_hash.fetch(:credentials).fetch(:token)
+
+      redirect_to root_url
+    else
+      # redirect to some unauthorized route
+    end
+  end
+
+  private
+
+  def auth_hash
+    request.env["omniauth.auth"]
+  end
+
+  def has_role?
+    auth_hash.fetch(:organisations).flat_map { |o| o[:roles] }.any?
+  end
+end
+```
 
 ### Debugging
 It can be handy to see exactly what requests are being made to the authentication provider.
