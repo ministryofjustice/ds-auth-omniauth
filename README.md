@@ -171,8 +171,9 @@ Notes:
 
 
 ### Authorization
-If the User does not have any roles for the application (as returned by the profile API response) then the organisations array will be empty.
-It is up to the consuming application to decide what to do then.
+The User object will be returned regardless of whether they have access
+to the application. It is up to the consuming app to decide how this
+should be handled.
 
 Likewise if configured in the Auth App if current_user does not have permission to access the application then the Authentication provider will redirect to `auth/failure?message=unauthorized` rather than the sessions#create route. See [https://github.com/intridea/omniauth/wiki](https://github.com/intridea/omniauth/wiki)
 
