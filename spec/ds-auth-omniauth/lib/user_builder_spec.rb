@@ -37,19 +37,7 @@ RSpec.describe DsAuth::Omniauth::UserBuilder, "#build_user" do
     it { is_expected.to be nil }
   end
 
-  context "when raw_info has no roles for any of the organisations" do
-    let(:roles) { [] }
-
-    it { is_expected.to be nil }
-  end
-
-  context "when raw_info has no organisations" do
-    let(:raw_info_response) { { "user" => {"organisations" => [] } } }
-
-    it { is_expected.to be nil }
-  end
-
-  context "when raw_info has roles for at least one organisation" do
+  context "with a non-blank token" do
     it "returns a new User object" do
       stub_user = double("User")
       expect(DsAuth::Omniauth::User).to receive(:build_from).with(raw_info_response).and_return stub_user

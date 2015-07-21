@@ -1,7 +1,6 @@
 module DsAuth
   module Omniauth
     class UserBuilder
-
       class NullRawInfo
         def initialize
           @data = {
@@ -10,8 +9,7 @@ module DsAuth
               "name" => "",
               "email" => "",
               "organisations" => []
-            },
-            "roles" => []
+            }
           }
         end
 
@@ -31,7 +29,7 @@ module DsAuth
 
         raw_info = fetch_raw_info(token)
 
-        User.build_from(raw_info) if has_roles?(raw_info)
+        User.build_from(raw_info)
       end
 
       private
@@ -49,17 +47,10 @@ module DsAuth
       end
 
       def fetch_raw_info(token)
-
         strategy_with_access_token(token: token).raw_info
 
         rescue OAuth2::Error
           NullRawInfo.new
-      end
-
-      def has_roles?(raw_info)
-        raw_info["user"]["organisations"].any? do |organisation|
-          !organisation["roles"].nil? && !organisation["roles"].empty?
-        end
       end
     end
   end
